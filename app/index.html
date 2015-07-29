@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>My AngularJS App</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+</head>
+<body>
+	<div class="contrainer" ng-app="app">
+		<!--<header ng-include="'templates/nav.html'"></header>-->
+		<header ng-include="'components/toolbar/toolbar.ng.html'"></header>
+		<header ng-include="'components/navbar/navbar.ng.html'"></header>
+		<div ui-view></div>
+		<footer ng-include="'templates/footer.html'"></footer>
+
+	</div>
+
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="app.js"></script>
+<script src="homeCtrl.js"></script>
+<script src="aboutCtrl.js"></script>
+<script src="components/main/main.js"></script>
+</body>
+</html>
