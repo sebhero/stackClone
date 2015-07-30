@@ -1,0 +1,3 @@
+interface ITag{
+	name:string;
+}

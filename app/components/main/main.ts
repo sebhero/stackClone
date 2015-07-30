@@ -1,7 +1,8 @@
 /**
  * Created by sebadmin on 2015-07-29.
  */
-///<reference path='../../../typings/tsd.d.ts' />
+///<reference path='../../../typingsCustom/myInterfaces.d.ts' />
+
 
 
 namespace stackClone{
@@ -12,14 +13,25 @@ namespace stackClone{
 	class Main{
 
 		componentName:string;
-		static $inject = ['$log'];
+		static $inject = ['$log','QuestionService'];
 
 
-		constructor(private $log:ng.ILogService) {
+		constructor(private $log:ng.ILogService, private questionService:stackClone.QuestionService) {
 
-			this.componentName = 'main';
-
+			this.componentName = 'Questions';
+			$log.info("Main LOADED");
+		
+			this.questionService.testCreateList();
+			for(var item of this.questionService.readAll()){
+				$log.info("item is "+item.title);
+			}
+			this.questionService.testUpdateDeleteRead();
+			for(var item of this.questionService.readAll()){
+				$log.info("item is "+item.title);
+			}			
 		}
+		
+		
 
 	}
 
@@ -32,6 +44,6 @@ namespace stackClone{
 		};
 	}
 
-	angular.module('app')
+	angular.module('stackClone')
 		.directive('sebMain', sebMain);
 }
