@@ -27,6 +27,8 @@ namespace stackClone{
 		add(newQuestion:IQuestion){
 			// newQuestion =this.checkQ(newQuestion);
 			this.questions.push(newQuestion);
+			newQuestion.id = this.questions.length;
+			this.$log.info("added id "+this.questions[newQuestion.id-1].id);
 			
 		}
 		
@@ -71,7 +73,7 @@ namespace stackClone{
 		 */
 		checkQ(item:IQuestion)
 		{
-			if(item.answears === undefined)		this.$log.info("Not defined Answere");
+			if(item.answers === undefined)		this.$log.info("Not defined Answere");
 			if(item.author === undefined)		this.$log.info("Not defined Author");;
 			if(item.description === undefined)	this.$log.info("Not defined description");
 			if(item.id === undefined)			this.$log.info("Not defined id");
@@ -88,25 +90,85 @@ namespace stackClone{
 			// <IQuestion>{}
 			this.add(
 				<IQuestion>{
+					author:"seb",
 					title:"Problems with printer",
 					description:"cant start printer",
-					author:"seb"					
+					tags:[
+						{name:"printer"},
+						{name:"xerox"}
+						],
+					votes:2,
+					solved:false,
+					solution:2,
+					answers:[
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"}
+						]
+
 					}
 				);
 			this.add(
 				<IQuestion>{
-					title:"Problems with printer 2",
+					author:"seb",
+					title:"Problems with printer",
 					description:"cant start printer",
-					author:"seb"					
+					tags:[
+						{name:"printer"},
+						{name:"xerox"}
+						],
+					votes:2,
+					solved:false,
+					solution:2,
+					answers:[
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"}
+						]
+
 					}
 				);
 			this.add(
 				<IQuestion>{
-					title:"Problems with printer 3",
+					author:"seb",
+					title:"Problems with printer",
 					description:"cant start printer",
-					author:"seb"					
+					tags:[
+						{name:"printer"},
+						{name:"xerox"}
+						],
+					votes:2,
+					solved:false,
+					solution:2,
+					answers:[
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"}
+						]
+
 					}
 				);
+			this.add(
+				<IQuestion>{
+					author:"seb",
+					title:"Problems with printer",
+					description:"cant start printer",
+					tags:[
+						{name:"printer"},
+						{name:"xerox"}
+						],
+					votes:2,
+					solved:false,
+					solution:2,
+					answers:[
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"},
+						{description:"restart printer",author:"seb"}
+						]
+
+					}
+				);
+
 		}
 		
 		testUpdateDeleteRead(){

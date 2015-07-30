@@ -12,7 +12,7 @@ var stackClone;
                 template: '<seb-main></seb-main>'
             }).state('ask', {
                 url: '/ask',
-                templateUrl: "components/ask/ask.ng.html",
+                templateUrl: "components/ask/ask.ng.html"
             }).state('problems', {
                 url: '/problems',
                 templateUrl: "components/problems/problems.ng.html"

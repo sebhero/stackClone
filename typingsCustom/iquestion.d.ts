@@ -1,11 +1,13 @@
+/// <reference path="myInterfaces.d.ts" />
+
 interface IQuestion{
-	id?:string;
+	id?:number;
 	author:string;
 	title:string;
 	description:string;
-	tags:Array<ITag>;
+	tags?:Array<ITag>;
 	votes:number;
 	solved:boolean;
 	solution?:number;
-	answears?:Array<IAnswere>
+	answers?:Array<IAnswer>
 }

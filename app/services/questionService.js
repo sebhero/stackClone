@@ -19,6 +19,8 @@ var stackClone;
         QuestionService.prototype.add = function (newQuestion) {
             // newQuestion =this.checkQ(newQuestion);
             this.questions.push(newQuestion);
+            newQuestion.id = this.questions.length;
+            this.$log.info("added id " + this.questions[newQuestion.id - 1].id);
         };
         /**
          * Remove the question
@@ -52,7 +54,7 @@ var stackClone;
          * Check if there is missing values of the JSON that need to be set
          */
         QuestionService.prototype.checkQ = function (item) {
-            if (item.answears === undefined)
+            if (item.answers === undefined)
                 this.$log.info("Not defined Answere");
             if (item.author === undefined)
                 this.$log.info("Not defined Author");
@@ -78,19 +80,72 @@ var stackClone;
         QuestionService.prototype.testCreateList = function () {
             // <IQuestion>{}
             this.add({
+                author: "seb",
                 title: "Problems with printer",
                 description: "cant start printer",
-                author: "seb"
+                tags: [
+                    { name: "printer" },
+                    { name: "xerox" }
+                ],
+                votes: 2,
+                solved: false,
+                solution: 2,
+                answers: [
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" }
+                ]
             });
             this.add({
-                title: "Problems with printer 2",
+                author: "seb",
+                title: "Problems with printer",
                 description: "cant start printer",
-                author: "seb"
+                tags: [
+                    { name: "printer" },
+                    { name: "xerox" }
+                ],
+                votes: 2,
+                solved: false,
+                solution: 2,
+                answers: [
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" }
+                ]
             });
             this.add({
-                title: "Problems with printer 3",
+                author: "seb",
+                title: "Problems with printer",
                 description: "cant start printer",
-                author: "seb"
+                tags: [
+                    { name: "printer" },
+                    { name: "xerox" }
+                ],
+                votes: 2,
+                solved: false,
+                solution: 2,
+                answers: [
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" }
+                ]
+            });
+            this.add({
+                author: "seb",
+                title: "Problems with printer",
+                description: "cant start printer",
+                tags: [
+                    { name: "printer" },
+                    { name: "xerox" }
+                ],
+                votes: 2,
+                solved: false,
+                solution: 2,
+                answers: [
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" },
+                    { description: "restart printer", author: "seb" }
+                ]
             });
         };
         QuestionService.prototype.testUpdateDeleteRead = function () {

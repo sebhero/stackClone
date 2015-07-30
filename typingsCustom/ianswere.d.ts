@@ -1,4 +1,4 @@
-interface IAnswere{
+interface IAnswer{
 	description:string;
 	author:string;
 }
