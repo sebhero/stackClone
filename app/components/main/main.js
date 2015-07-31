@@ -9,23 +9,14 @@ var stackClone;
      */
     // class Main extends TestTimer{
     var Main = (function () {
-        function Main($log, questionService) {
+        function Main($log, questionService, shared) {
             this.$log = $log;
             this.questionService = questionService;
-            this.componentName = 'Questions';
+            this.shared = shared;
+            this.componentName = 'Questions as';
             $log.info("Main LOADED");
-            this.questionService.testCreateList();
-            for (var _i = 0, _a = this.questionService.readAll(); _i < _a.length; _i++) {
-                var item = _a[_i];
-                $log.info("item is " + item.title);
-            }
-            this.questionService.testUpdateDeleteRead();
-            for (var _b = 0, _c = this.questionService.readAll(); _b < _c.length; _b++) {
-                var item = _c[_b];
-                $log.info("item is " + item.title);
-            }
         }
-        Main.$inject = ['$log', 'QuestionService'];
+        Main.$inject = ['$log', 'QuestionService', 'SharedService'];
         return Main;
     })();
     function sebMain() {

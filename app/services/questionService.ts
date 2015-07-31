@@ -2,6 +2,7 @@
  * Created by seb on 2015-07-27.
  */
 /// <reference path="../../typingsCustom/myInterfaces.d.ts" />
+
 namespace stackClone{
 	// declare var Todos: Mongo.Collection<ITodo>;
 
@@ -19,17 +20,16 @@ namespace stackClone{
 			$log.info("QuestionService LOADED");
 			// this.todos = $meteor.collection(Todos).subscribe('todos');
 			this.questions = new Array<IQuestion>();
+			this.testCreateList();
 		}
 		
 		/**
 		 * add a question to the list of questions
 		 */
 		add(newQuestion:IQuestion){
-			// newQuestion =this.checkQ(newQuestion);
-			this.questions.push(newQuestion);
-			newQuestion.id = this.questions.length;
-			this.$log.info("added id "+this.questions[newQuestion.id-1].id);
-			
+			newQuestion =this.checkQ(newQuestion);
+			newQuestion.id =this.questions.push(newQuestion);
+			// newQuestion.id = this.questions.length;			
 		}
 		
 		/**
@@ -59,9 +59,12 @@ namespace stackClone{
 			this.questions[indx] = theQ;
 		}
 		
+		/**
+		 * Find the question by Id
+		 */
 		findByIndex(indx:number):IQuestion
 		{
-			return this.questions[indx];
+			return this.questions[indx-1];
 		}
 		
 		readAll():Array<IQuestion>{
@@ -73,16 +76,21 @@ namespace stackClone{
 		 */
 		checkQ(item:IQuestion)
 		{
-			if(item.answers === undefined)		this.$log.info("Not defined Answere");
-			if(item.author === undefined)		this.$log.info("Not defined Author");;
-			if(item.description === undefined)	this.$log.info("Not defined description");
-			if(item.id === undefined)			this.$log.info("Not defined id");
-			if(item.solution === undefined)		this.$log.info("Not defined solution");
-			if(item.solved === undefined)		this.$log.info("Not defined solved");item.solved=false;
-			if(item.tags === undefined)			this.$log.info("Not defined tags");
-			if(item.title === undefined)		this.$log.info("Not defined title");
-			if(item.votes === undefined)		this.$log.info("Not defined votes");item.votes =0;
-			
+			if(item === undefined)
+			{
+				this.$log.info("Not defined Question");
+			}
+			else{
+				if(item.answers === undefined)		this.$log.info("Not defined Answere");
+				if(item.author === undefined)		this.$log.info("Not defined Author");;
+				if(item.description === undefined)	this.$log.info("Not defined description");
+				if(item.id === undefined)			this.$log.info("Not defined id");
+				if(item.solution === undefined)		this.$log.info("Not defined solution");
+				if(item.solved === undefined)		this.$log.info("Not defined solved");item.solved=false;
+				if(item.tags === undefined)			this.$log.info("Not defined tags");
+				if(item.title === undefined)		this.$log.info("Not defined title");
+				if(item.votes === undefined)		this.$log.info("Not defined votes");item.votes =0;
+			}
 			return item;
 		}
 		
@@ -91,19 +99,39 @@ namespace stackClone{
 			this.add(
 				<IQuestion>{
 					author:"seb",
-					title:"Problems with printer",
-					description:"cant start printer",
+					title:"Problems with windows",
+					description:"cant start windows",
 					tags:[
-						{name:"printer"},
-						{name:"xerox"}
+						{text:"windows"},
+						{text:"pc"}
 						],
 					votes:2,
 					solved:false,
 					solution:2,
 					answers:[
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"}
+						{description:"restart pc",author:"seb",votes:0},
+						{description:"restart pc",author:"seb",votes:0},
+						{description:"restart pc",author:"seb",votes:0}
+						]
+
+					}
+				);
+			this.add(
+				<IQuestion>{
+					author:"seb",
+					title:"Problems with vpn",
+					description:"cant start vpn service",
+					tags:[
+						{text:"vpn"},
+						{text:"internet"},
+						{text:"pc"}
+						],
+					votes:2,
+					solved:false,
+					solution:2,
+					answers:[
+						{description:"restart pc",author:"seb",votes:0},
+						{description:"restart internet",author:"seb",votes:0},
 						]
 
 					}
@@ -114,16 +142,16 @@ namespace stackClone{
 					title:"Problems with printer",
 					description:"cant start printer",
 					tags:[
-						{name:"printer"},
-						{name:"xerox"}
+						{text:"printer"},
+						{text:"xerox"}
 						],
 					votes:2,
 					solved:false,
 					solution:2,
 					answers:[
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"}
+						{description:"restart printer",author:"seb",votes:0},
+						{description:"restart printer",author:"seb",votes:0},
+						{description:"restart printer",author:"seb",votes:0}
 						]
 
 					}
@@ -134,36 +162,16 @@ namespace stackClone{
 					title:"Problems with printer",
 					description:"cant start printer",
 					tags:[
-						{name:"printer"},
-						{name:"xerox"}
+						{text:"printer"},
+						{text:"xerox"}
 						],
 					votes:2,
 					solved:false,
 					solution:2,
 					answers:[
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"}
-						]
-
-					}
-				);
-			this.add(
-				<IQuestion>{
-					author:"seb",
-					title:"Problems with printer",
-					description:"cant start printer",
-					tags:[
-						{name:"printer"},
-						{name:"xerox"}
-						],
-					votes:2,
-					solved:false,
-					solution:2,
-					answers:[
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"},
-						{description:"restart printer",author:"seb"}
+						{description:"restart printer",author:"seb",votes:0},
+						{description:"restart printer",author:"seb",votes:0},
+						{description:"restart printer",author:"seb",votes:0}
 						]
 
 					}

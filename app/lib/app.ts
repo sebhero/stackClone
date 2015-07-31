@@ -9,7 +9,8 @@ namespace stackClone{
 angular.module('stackClone', [
 	'ui.router',
 	'ngAnimate',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'ngTagsInput'
 
 ])
 

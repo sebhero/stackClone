@@ -13,22 +13,14 @@ namespace stackClone{
 	class Main{
 
 		componentName:string;
-		static $inject = ['$log','QuestionService'];
+		static $inject = ['$log','QuestionService','SharedService'];
 
 
-		constructor(private $log:ng.ILogService, private questionService:stackClone.QuestionService) {
+		constructor(private $log:ng.ILogService, private questionService:stackClone.QuestionService,private shared:stackClone.SharedService) {
 
-			this.componentName = 'Questions';
+			this.componentName = 'Questions as';
 			$log.info("Main LOADED");
-		
-			this.questionService.testCreateList();
-			for(var item of this.questionService.readAll()){
-				$log.info("item is "+item.title);
-			}
-			this.questionService.testUpdateDeleteRead();
-			for(var item of this.questionService.readAll()){
-				$log.info("item is "+item.title);
-			}			
+				
 		}
 		
 		

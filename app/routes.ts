@@ -11,18 +11,29 @@ namespace stackClone{
     		$urlRouterProvider.otherwise('/');
     
     		$stateProvider
-    		.state('questions',{
+    		.state('home',{
     			url:'/',
     				template: '<seb-main></seb-main>'
-    		}).state('ask',{
+    		})
+    		.state('questions',{
+    			url:'/questions',
+    				template: '<seb-main></seb-main>'
+    		})
+        .state('ask',{
     			url:'/ask',
-    			templateUrl: "components/ask/ask.ng.html",
+          template: "<seb-ask>faild load ask</seb-ask>"
+    			// templateUrl: "components/ask/ask.ng.html",
     		}).state('problems',{
     			url:'/problems',
     			templateUrl:"components/problems/problems.ng.html"
-    		}).state('question',{
-    			url:'/question',
-    			templateUrl:"components/question/question.ng.html"
+    		}).state('testQ',{
+    			url:'/questions/1',
+          params:{qId:1},
+          template: '<seb-question></seb-question>'
+    		})
+    		.state('question',{
+    			url:'/questions/:qId',
+    			template: '<seb-question></seb-question>'
     		});
     
     }]);
@@ -40,3 +51,6 @@ namespace stackClone{
   //     }
   //   });
   // }]);
+  
+  
+  

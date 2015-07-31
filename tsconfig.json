@@ -10,6 +10,17 @@
 		"target": "ES5",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators":true
-
-	}
+	},
+	"files": [
+		"C:/temp/workspace/0_clones/stackClone/app/routes.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/lib/app.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/components/main/main.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/components/ask/ask.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/components/question/question.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/components/toolbar/toolbar.ng.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/components/navbar/navbar.ng.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/services/questionService.ts",
+		"C:/temp/workspace/0_clones/stackClone/app/services/sharedService.ts"
+	]
+	
 }

@@ -6,7 +6,8 @@ var stackClone;
     angular.module('stackClone', [
         'ui.router',
         'ngAnimate',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'ngTagsInput'
     ]);
 })(stackClone || (stackClone = {}));
 //# sourceMappingURL=app.js.map

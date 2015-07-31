@@ -1,3 +1,3 @@
 interface ITag{
-	name:string;
+	text:string;
 }

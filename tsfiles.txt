@@ -1,0 +1,7 @@
+to generate file
+dir *.ts /b /s >> tsfiles.txt
+
+to watch file
+tsc --watch
+
+need to add TS files in tsconfig.json
