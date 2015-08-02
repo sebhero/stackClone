@@ -6,7 +6,11 @@
 			<div class="col-sm-1">
 				<ul class="list-unstyled">
 					<li><button ng-click="question.voteUp()" class="btn glyphicon glyphicon-chevron-up"></button></li>
-					<li>{{question.theQ.votes}}</li>
+					<li>
+						<div class="well-sm text-center">
+							{{question.theQ.votes}}
+						</div>
+					</li>
 					<li><button ng-click="question.voteDown()" class="btn glyphicon glyphicon-chevron-down"></button></li>
 				</ul>
 			</div>
@@ -40,14 +44,18 @@
 				<div class="col-sm-1">
 					<ul class="list-unstyled">
 						<li><button ng-click="question.voteAnswereUp(answere)" class="btn glyphicon glyphicon-chevron-up"></span></li>
-						<li>{{answere.votes}}</li>
+						<li>
+							<div class="well-sm text-center">
+							{{answere.votes}}
+							</div>
+						</li>
 						<li><button ng-click="question.voteAnswereDown(answere)" class="btn glyphicon glyphicon-chevron-down"></span></li>
 						<li ng-hide="question.theQ.solved && !answere.solution"><button ng-click="question.solveToggle(answere,$index)" 
 							class="btn glyphicon glyphicon-ok"></button></li>
 					</ul>
 				</div>
 				<div class="col-sm-10">
-					<div>{{answere.description}}</div>
+					<div  marked="answere.description"></div>
 					<div class="row">
 						<div class="col-sm-3 pull-right bg-info">
 							<p>Answered: 2015-03-01</p>
@@ -57,6 +65,18 @@
 				</div>
 			</div>
 			<hr>
+		</div>
+		<div class="container">
+			<h4>Add a answer</h4>
+			<p>You can use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a> for input </p>
+			<textarea class="form-control" rows="3" data-ng-model="question.my_markdown"></textarea>
+			<br/>
+			<button class="btn btn-primary" ng-click="question.addAnswer()">Add answer</button>
+			<hr/>
+			<div class="container bg-warning col-sm-12">
+				<div marked="question.my_markdown" >
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -7,7 +7,15 @@ var stackClone;
         'ui.router',
         'ngAnimate',
         'ui.bootstrap',
-        'ngTagsInput'
-    ]);
+        'ngTagsInput',
+        'ngSanitize',
+        'hc.marked'
+    ])
+        .config(['markedProvider', function (markedProvider) {
+            markedProvider.setOptions({
+                gfm: true,
+                sanitize: true
+            });
+        }]);
 })(stackClone || (stackClone = {}));
 //# sourceMappingURL=app.js.map

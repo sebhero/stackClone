@@ -13,6 +13,7 @@ namespace stackClone{
 	class Main{
 
 		componentName:string;
+
 		static $inject = ['$log','QuestionService','SharedService'];
 
 
@@ -20,7 +21,7 @@ namespace stackClone{
 
 			this.componentName = 'Questions as';
 			$log.info("Main LOADED");
-				
+
 		}
 		
 		

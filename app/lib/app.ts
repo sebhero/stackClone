@@ -10,8 +10,16 @@ angular.module('stackClone', [
 	'ui.router',
 	'ngAnimate',
 	'ui.bootstrap',
-	'ngTagsInput'
-
+	'ngTagsInput',
+	'ngSanitize',
+	'hc.marked'
+	//'hc.commonmark'
 ])
+	.config(['markedProvider', function(markedProvider) {
+		markedProvider.setOptions({
+			gfm: true,
+			sanitize: true
+		});
+	}]);
 
 }

@@ -53,6 +53,14 @@ var stackClone;
             }
             this.$log.info("idx: " + idx + " answere: " + answere.description + " idxans> " + this.theQ.answers[idx].description);
         };
+        Question.prototype.addAnswer = function () {
+            this.my_markdown;
+            this.theQ.answers.push({
+                author: "seb",
+                description: this.my_markdown,
+                votes: 0
+            });
+        };
         Question.$inject = ['$log', '$stateParams', 'QuestionService'];
         return Question;
     })();

@@ -9,6 +9,8 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 	class Question {
 		componentName:string;
 		theQ:IQuestion;
+
+		my_markdown:string;
 		
 		static $inject = ['$log','$stateParams','QuestionService'];
 		
@@ -70,8 +72,16 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			}
 			this.$log.info("idx: "+idx+" answere: "+answere.description+" idxans> "+this.theQ.answers[idx].description);  
 		}
-		
-		
+
+		addAnswer(){
+			this.my_markdown;
+			this.theQ.answers.push(<IAnswer>{
+				author:"seb",
+				description:this.my_markdown,
+				votes: 0
+			});
+
+		}
 		
 		
 	}
