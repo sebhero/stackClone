@@ -34,14 +34,14 @@
 			<div class="col-sm-10">
 				<!--<a ui-sref="question({{q.id}})"><h4>{{q.title}}</h4></a>-->
 				<a ui-sref="question({qId: q.id})"><h4>{{q.title}}</h4></a>
-				<div>
-					{{q.description}}
+				<div marked="q.description" >
+					<!--{{q.description}}-->
 				</div>
 				<div>
 					<ul class="list-inline list-unstyled">
 						<li ng-repeat="tag in q.tags"><h4> <span class="label label-info">{{tag.text}}</span></h4></li>
 					</ul>
-					<small><a>Solution {{q.solution}}</a></small>
+					<small ng-show="q.solved"><a ui-sref="question({qId:q.id, gotoSolve:true})">Solution {{q.solution}}</a></small>
 				</div>
 			</div>
 		</div>

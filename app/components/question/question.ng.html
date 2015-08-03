@@ -15,7 +15,9 @@
 				</ul>
 			</div>
 			<div class="col-sm-10">
-				<div>{{question.theQ.description}}</div>
+				<div marked="question.theQ.description" >
+					<!--{{question.theQ.description}}-->
+				</div>
 				<ul class="list-inline list-unstyled">
 					<li ng-repeat="tag in question.theQ.tags"><h4> <span class="label label-info">{{tag.text}}</span></h4></li>
 				</ul>
@@ -39,7 +41,7 @@
 	<div class="container">
 		<h4>{{question.theQ.answers.length}} Answere</h4>
 		<hr/>
-		<div class="container" ng-repeat="answere in question.theQ.answers">
+		<div id="answer_{{answere.id}}" class="container" ng-repeat="answere in question.theQ.answers">
 			<div class="row">
 				<div class="col-sm-1">
 					<ul class="list-unstyled">

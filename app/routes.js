@@ -22,12 +22,14 @@ var stackClone;
                 url: '/problems',
                 templateUrl: "components/problems/problems.ng.html"
             }).state('testQ', {
-                url: '/questions/1',
-                params: { qId: 1 },
+                url: '/questions/1?gotoSolve=true',
+                // url:'/questions/1?test',
+                params: { qId: 1, gotoSolve: "true" },
                 template: '<seb-question></seb-question>'
             })
                 .state('question', {
-                url: '/questions/:qId',
+                // url:'/questions/:qId?gotoSolve',
+                url: '/questions/{qId}?gotoSolve',
                 template: '<seb-question></seb-question>'
             });
         }]);

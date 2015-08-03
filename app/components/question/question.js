@@ -2,15 +2,33 @@
 var stackClone;
 (function (stackClone) {
     var Question = (function () {
-        function Question($log, $stateParams, questionService) {
+        function Question($log, $stateParams, $state, questionService, $location, $anchorScroll) {
             this.$log = $log;
             this.questionService = questionService;
+            this.$location = $location;
+            this.$anchorScroll = $anchorScroll;
             this.componentName = 'sebQuestion';
             $log.info("State params: " + $stateParams.qId);
+            $log.info("goto params: " + $stateParams.gotoSolve);
+            $log.info("params: " + JSON.stringify($state.params));
             if ($stateParams.qId != undefined) {
                 //load question
                 this.theQ = questionService.findByIndex($stateParams.qId);
-                this.listQ(this.theQ);
+                // this.listQ(this.theQ);
+                if ($stateParams.gotoSolve) {
+                    this.$log.info($stateParams.gotoSolve + " its GOTO");
+                    var newHash = 'answer_' + this.theQ.solution;
+                    if ($location.hash() !== newHash) {
+                        // set the $location.hash to `newHash` and
+                        // $anchorScroll will automatically scroll to it
+                        $location.hash('answer_' + this.theQ.solution);
+                    }
+                    else {
+                        // call $anchorScroll() explicitly,
+                        // since $location.hash hasn't changed
+                        $anchorScroll();
+                    }
+                }
             }
         }
         Question.prototype.listQ = function (q) {
@@ -46,7 +64,7 @@ var stackClone;
             this.theQ.solved = !this.theQ.solved;
             answere.solution = !answere.solution;
             if (this.theQ.solved) {
-                this.theQ.solution = idx;
+                this.theQ.solution = answere.id;
             }
             else {
                 this.theQ.solution = undefined;
@@ -55,13 +73,16 @@ var stackClone;
         };
         Question.prototype.addAnswer = function () {
             this.my_markdown;
-            this.theQ.answers.push({
+            var answerId = this.theQ.answers.push({
                 author: "seb",
                 description: this.my_markdown,
                 votes: 0
             });
+            //TODO this should be auto gen. from DB
+            this.theQ.answers[answerId].id = answerId;
         };
-        Question.$inject = ['$log', '$stateParams', 'QuestionService'];
+        Question.$inject = ['$log', '$stateParams', '$state',
+            'QuestionService', '$location', '$anchorScroll'];
         return Question;
     })();
     function sebQuestion() {

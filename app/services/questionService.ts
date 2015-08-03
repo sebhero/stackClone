@@ -86,10 +86,14 @@ namespace stackClone{
 				if(item.description === undefined)	this.$log.info("Not defined description");
 				if(item.id === undefined)			this.$log.info("Not defined id");
 				if(item.solution === undefined)		this.$log.info("Not defined solution");
-				if(item.solved === undefined)		this.$log.info("Not defined solved");item.solved=false;
+				if(item.solved === undefined)		{this.$log.info("Not defined solved");item.solved=false;}
 				if(item.tags === undefined)			this.$log.info("Not defined tags");
 				if(item.title === undefined)		this.$log.info("Not defined title");
-				if(item.votes === undefined)		this.$log.info("Not defined votes");item.votes =0;
+				if(item.votes === undefined)		
+				{
+					this.$log.info("Not defined votes");
+					item.votes =0;
+				}
 			}
 			return item;
 		}
@@ -100,18 +104,35 @@ namespace stackClone{
 				<IQuestion>{
 					author:"seb",
 					title:"Problems with windows",
-					description:"cant start windows",
+					description:"## test\n\ncant start windows",
 					tags:[
 						{text:"windows"},
 						{text:"pc"}
 						],
 					votes:2,
-					solved:false,
+					solved:true,
 					solution:2,
 					answers:[
-						{description:"restart pc",author:"seb",votes:0},
-						{description:"restart pc",author:"seb",votes:0},
-						{description:"restart pc",author:"seb",votes:0}
+						{
+							description:"restart pc",
+							author:"seb",
+							votes:0,
+							id:1
+							},
+							
+						{
+							description:"reinstall pc",
+							author:"seb",
+							votes:0,
+							id:2,
+							solution:true
+						},
+						{
+							description:"restart pc",
+							author:"seb",
+							votes:0,
+							id:3
+						}
 						]
 
 					}
@@ -130,8 +151,39 @@ namespace stackClone{
 					solved:false,
 					solution:2,
 					answers:[
-						{description:"restart pc",author:"seb",votes:0},
-						{description:"restart internet",author:"seb",votes:0},
+						{
+							id:1,
+							description:"restart internet",author:"seb",votes:0},
+						]
+
+					}
+				);
+			this.add(
+				<IQuestion>{
+					author:"seb",
+					title:"Problems with printer",
+					description:"cant start printer",
+					tags:[
+						{text:"printer"},
+						{text:"xerox"}
+						],
+					votes:2,
+					solved:true,
+					solution:2,
+					answers:[
+						{
+							id:1,
+							description:"restart printer",author:"seb",votes:0,
+							
+						},
+						{
+							id:2,
+							description:"restart printer",author:"seb",votes:0,
+							solution:true	
+						},
+						{
+							id:3,
+							description:"restart printer",author:"seb",votes:0}
 						]
 
 					}
@@ -149,29 +201,9 @@ namespace stackClone{
 					solved:false,
 					solution:2,
 					answers:[
-						{description:"restart printer",author:"seb",votes:0},
-						{description:"restart printer",author:"seb",votes:0},
-						{description:"restart printer",author:"seb",votes:0}
-						]
-
-					}
-				);
-			this.add(
-				<IQuestion>{
-					author:"seb",
-					title:"Problems with printer",
-					description:"cant start printer",
-					tags:[
-						{text:"printer"},
-						{text:"xerox"}
-						],
-					votes:2,
-					solved:false,
-					solution:2,
-					answers:[
-						{description:"restart printer",author:"seb",votes:0},
-						{description:"restart printer",author:"seb",votes:0},
-						{description:"restart printer",author:"seb",votes:0}
+						{
+							id:1,
+							description:"restart printer",author:"seb",votes:0},
 						]
 
 					}

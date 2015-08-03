@@ -4,6 +4,7 @@ namespace stackClone{
 
 interface IaskStateParams extends ng.ui.IStateParamsService{
 	qId:number;
+	gotoSolve:boolean;
 }
 
 	class Question {
@@ -12,18 +13,39 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 
 		my_markdown:string;
 		
-		static $inject = ['$log','$stateParams','QuestionService'];
+		static $inject = ['$log','$stateParams','$state'
+			,'QuestionService','$location', '$anchorScroll'];
 		
 			constructor(private $log:ng.ILogService, 		
 						$stateParams:IaskStateParams,
-						private questionService:stackClone.QuestionService
+						$state:ng.ui.IState,
+						private questionService:stackClone.QuestionService,
+						private $location, private $anchorScroll
 						) {
 			this.componentName = 'sebQuestion';
 			$log.info("State params: "+$stateParams.qId);
+			$log.info("goto params: "+$stateParams.gotoSolve);
+			$log.info("params: "+JSON.stringify($state.params));
+			
+			
 			if($stateParams.qId != undefined){
 				//load question
 				this.theQ= questionService.findByIndex($stateParams.qId);
-				this.listQ(this.theQ);
+				// this.listQ(this.theQ);
+				
+				if($stateParams.gotoSolve){
+					this.$log.info($stateParams.gotoSolve+ " its GOTO");
+					var newHash = 'answer_' + this.theQ.solution;
+				 if ($location.hash() !== newHash) {
+			        // set the $location.hash to `newHash` and
+			        // $anchorScroll will automatically scroll to it
+			        $location.hash('answer_' + this.theQ.solution);
+			      } else {
+			        // call $anchorScroll() explicitly,
+			        // since $location.hash hasn't changed
+			        $anchorScroll();
+			      }
+			  }
 			}
 		}
 		
@@ -64,7 +86,7 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			this.theQ.solved = !this.theQ.solved;
 			answere.solution = !answere.solution;
 			if(this.theQ.solved){
-				this.theQ.solution =idx;
+				this.theQ.solution =answere.id;
 			}
 			else
 			{
@@ -75,11 +97,13 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 
 		addAnswer(){
 			this.my_markdown;
-			this.theQ.answers.push(<IAnswer>{
+			var answerId= this.theQ.answers.push(<IAnswer>{
 				author:"seb",
 				description:this.my_markdown,
 				votes: 0
 			});
+			//TODO this should be auto gen. from DB
+			this.theQ.answers[answerId].id= answerId;
 
 		}
 		
