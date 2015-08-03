@@ -97,13 +97,19 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 
 		addAnswer(){
 			this.my_markdown;
-			var answerId= this.theQ.answers.push(<IAnswer>{
+			this.$log.info("adding a answer");
+			if(this.theQ.answers == undefined)
+			{
+				this.theQ.answers = [];
+			}
+			this.theQ.answers.push(<IAnswer>{
 				author:"seb",
 				description:this.my_markdown,
-				votes: 0
+				votes: 0,
+				id: (this.theQ.answers.length+1)
 			});
 			//TODO this should be auto gen. from DB
-			this.theQ.answers[answerId].id= answerId;
+
 
 		}
 		

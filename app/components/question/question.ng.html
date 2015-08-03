@@ -52,11 +52,12 @@
 							</div>
 						</li>
 						<li><button ng-click="question.voteAnswereDown(answere)" class="btn glyphicon glyphicon-chevron-down"></span></li>
-						<li ng-hide="question.theQ.solved && !answere.solution"><button ng-click="question.solveToggle(answere,$index)" 
+						<li ng-hide="question.theQ.solved && !answere.solution"><button ng-click="question.solveToggle(answere,$index)"
 							class="btn glyphicon glyphicon-ok"></button></li>
 					</ul>
 				</div>
 				<div class="col-sm-10">
+					<div>answere id: {{answere.id}}</div>
 					<div  marked="answere.description"></div>
 					<div class="row">
 						<div class="col-sm-3 pull-right bg-info">
