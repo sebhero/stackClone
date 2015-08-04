@@ -5,15 +5,26 @@
 namespace stackClone{
 	// declare var Todos: Mongo.Collection<ITodo>;
 
+	
+	
+
 	export class SharedService{
 		
+		
+		
+		
 		searchFilter:string="";
+		
+		public searchOrder:string;
 
 		static $inject = ['$log'];
 
 		constructor(private $log:ng.ILogService){
 
 			$log.info("SharedService LOADED");
+			
+			//this.searchOrder = SearchOrderEnum.ACTIVE;
+			
 		}
 		
 		

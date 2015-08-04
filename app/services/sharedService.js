@@ -10,6 +10,7 @@ var stackClone;
             this.$log = $log;
             this.searchFilter = "";
             $log.info("SharedService LOADED");
+            //this.searchOrder = SearchOrderEnum.ACTIVE;
         }
         SharedService.$inject = ['$log'];
         return SharedService;

@@ -1,12 +1,18 @@
-
+order: {{main.shared.searchOrder}}
 <div class="container">
 
 	<div class="pull-right">
 		<ul class="list-unstyled list-inline">
 			<li>Sort by:</li>
-			<li><button class="btn-link btn-sm">New</button></li>
-			<li><button class="btn-link btn-sm">Active</button></li>
-			<li><button class="btn-link btn-sm">Unanswered</button></li>
+			<li><button class="btn-link btn-sm" 
+				ng-click="main.shared.searchOrder='new'" 
+				>New</button></li>
+			<li><button class="btn-link btn-sm" 
+				ng-click="main.shared.searchOrder ='printer'" 
+				>printer</button></li>
+			<li><button class="btn-link btn-sm" 
+				ng-click="main.shared.searchOrder ='unanswered'" 
+				>Unanswered</button></li>
 		</ul>
 	</div>
 	<h4>{{main.componentName}}</h4>

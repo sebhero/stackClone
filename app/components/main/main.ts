@@ -21,10 +21,8 @@ namespace stackClone{
 
 			this.componentName = 'Questions as';
 			$log.info("Main LOADED");
-
+			
 		}
-		
-		
 
 	}
 

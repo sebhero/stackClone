@@ -154,7 +154,7 @@ var stackClone;
                 answers: [
                     {
                         id: 1,
-                        description: "restart printer", author: "seb", votes: 0
+                        description: "restart printer", author: "seb", votes: 0,
                     },
                     {
                         id: 2,
