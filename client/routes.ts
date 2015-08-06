@@ -24,11 +24,24 @@ namespace stackClone{
 					})
 					.state('ask',{
 						url:'/ask',
-						template: "<seb-ask>faild load ask</seb-ask>"
+						template: "<seb-ask>faild load ask</seb-ask>",
+						resolve: {
+							"currentUser": ["$meteor", function($meteor){
+								return $meteor.requireUser();
+							}]
+						}
 						// templateUrl: "components/ask/ask.ng.html",
 					}).state('problems',{
 						url:'/problems',
-						templateUrl:"client/components/problems/problems.ng.html"
+						templateUrl:"client/components/problems/problems.ng.html",
+						resolve: {
+							"currentUser": ["$meteor", function($meteor){
+
+								$meteor.call('checkIfAdmin');
+								return true;
+								//return $meteor.requireUser();
+							}]
+						}
 					}).state('testQ',{
 						url:'/questions/1?gotoSolve=true',
 						// url:'/questions/1?test',

@@ -1,2 +1,2 @@
-///<reference path='../../typingsCustom/myInterfaces.d.ts' />
+///<reference path='../typingsCustom/myInterfaces.d.ts' />
 //# sourceMappingURL=question.js.map
