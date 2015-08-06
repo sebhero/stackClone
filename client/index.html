@@ -1,0 +1,21 @@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>StackClone</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>-->
+	<!--<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">-->
+</head>
+<body>
+	<div class="contrainer" ng-app="stackClone">
+	<!--<div class="contrainer">-->
+		<!--<header ng-include="'components/toolbar/toolbar.ng.html'"></header>-->
+		<seb-toolbar></seb-toolbar>
+		<header ng-include="'client/components/navbar/navbar.ng.html'"></header>
+		<div ui-view></div>
+		<footer ng-include="'client/components/footer/footer.ng.html'"></footer>
+
+	</div>
+
+</body>

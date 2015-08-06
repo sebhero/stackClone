@@ -1,0 +1,62 @@
+<div class="container">
+	<h3>Problem with Printer</h3>
+	<hr/>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-1">
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-chevron-up"></span></li>
+					<li>3</li>
+					<li><span class="glyphicon glyphicon-chevron-down"></span></li>
+				</ul>
+			</div>
+			<div class="col-sm-10">
+				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet doloremque eveniet explicabo quaerat sint temporibus, vitae voluptatem. Dolor labore molestiae non numquam omnis pariatur, repellendus sed tempore veniam voluptatum?</div>
+				<ul class="list-inline list-unstyled">
+					<li><h4> <span class="label label-info">a tag</span></h4></li>
+					<li><h4> <span class="label label-info">a tag</span></h4></li>
+					<li><h4> <span class="label label-info">a tag</span></h4></li>
+				</ul>
+				<div class="row">
+					<div class="col-sm-4">
+						<a href="">edit</a>
+						<a href="">delete</a>
+					</div>
+					<div class="col-sm-5">
+						edited 2015-03-01
+					</div>
+					<div class="col-sm-3 pull-right bg-info">
+						<p>asked: 2015-03-01</p>
+						<p>Author: Sebastian</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<h4>1 Answere</h4>
+		<hr/>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-1">
+					<ul class="list-unstyled">
+						<li><span class="glyphicon glyphicon-chevron-up"></span></li>
+						<li>3</li>
+						<li><span class="glyphicon glyphicon-chevron-down"></span></li>
+						<li><span class="glyphicon glyphicon-ok"></span></li>
+					</ul>
+				</div>
+				<div class="col-sm-10">
+					<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet doloremque eveniet explicabo quaerat sint temporibus, vitae voluptatem. Dolor labore molestiae non numquam omnis pariatur, repellendus sed tempore veniam voluptatum?</div>
+					<div class="row">
+						<div class="col-sm-3 pull-right bg-info">
+							<p>Answered: 2015-03-01</p>
+							<p>Author: Sebastian</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

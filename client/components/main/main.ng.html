@@ -1,0 +1,58 @@
+order: {{main.shared.searchOrder}}
+<div class="container">
+
+	<div class="pull-right">
+		<ul class="list-unstyled list-inline">
+			<li>Sort by:</li>
+			<li><button class="btn-link btn-sm" 
+				ng-click="main.shared.searchOrder='new'" 
+				>New</button></li>
+			<li><button class="btn-link btn-sm" 
+				ng-click="main.shared.searchOrder ='printer'" 
+				>printer</button></li>
+			<li><button class="btn-link btn-sm" 
+				ng-click="main.shared.searchOrder ='unanswered'" 
+				>Unanswered</button></li>
+		</ul>
+	</div>
+	<h4>{{main.componentName}}</h4>
+</div>
+
+<hr/>
+<div ng-repeat="q in main.questionService.readAll() | filter: main.shared.searchFilter">
+	<div class="container bg-success">
+		<div class="row">
+			<div class="col-sm-1 ">
+				<h2 class="glyphicon glyphicon-ok-circle"></h2>
+			</div>
+			<div class="col-sm-1">
+				<ul class="list-unstyled">
+					<li>
+						<p>{{q.votes}}</p>
+						<small>votes</small>
+					</li>
+					<li>
+						<div>{{q.answers.length}}</div>
+						<small>answers</small>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-10">
+				<!--<a ui-sref="question({{q.id}})"><h4>{{q.title}}</h4></a>-->
+				<a ui-sref="question({qId: q.id})"><h4>{{q.title}}</h4></a>
+				<div marked="q.description" >
+					<!--{{q.description}}-->
+				</div>
+				<div>
+					<ul class="list-inline list-unstyled">
+						<li ng-repeat="tag in q.tags"><h4> <span class="label label-info">{{tag.text}}</span></h4></li>
+					</ul>
+					<small ng-show="q.solved"><a ui-sref="question({qId:q.id, gotoSolve:true})">Solution {{q.solution}}</a></small>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	<br>
+</div>
+
