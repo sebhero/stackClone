@@ -22,8 +22,10 @@
 		"C:/temp/workspace/0_clones/stackclone_met/client/services/questionService.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/client/services/sharedService.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/server/serverRoles.ts",
+		"C:/temp/workspace/0_clones/stackclone_met/server/startUp/startUp.ts",
+		"C:/temp/workspace/0_clones/stackclone_met/server/questions.publish.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/models/question.ts",
-		"C:/temp/workspace/0_clones/stackclone_met/server/startUp/startUp.ts"
+		"C:/temp/workspace/0_clones/stackclone_met/models/answer.ts"
 	]
 	
 }

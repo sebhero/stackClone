@@ -7,20 +7,25 @@ var stackClone;
     // declare var Todos: Mongo.Collection<ITodo>;
     var QuestionService = (function () {
         // constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService){
-        function QuestionService($log) {
+        function QuestionService($log, $meteor, $state) {
             this.$log = $log;
+            this.$meteor = $meteor;
+            this.$state = $state;
             $log.info("QuestionService LOADED");
-            // this.todos = $meteor.collection(Todos).subscribe('todos');
-            this.questions = new Array();
-            this.testCreateList();
+            this.questions = $meteor.collection(Questions).subscribe('questions');
+            //For testing
+            // this.questions = new Array<IQuestion>();
+            // this.testCreateList();
         }
         /**
          * add a question to the list of questions
          */
         QuestionService.prototype.add = function (newQuestion) {
+            //maybe do this on server..
+            newQuestion.author = Meteor.userId();
             newQuestion = this.checkQ(newQuestion);
-            newQuestion.id = this.questions.push(newQuestion);
-            // newQuestion.id = this.questions.length;			
+            this.questions.push(newQuestion);
+            this.$state.go('questions');
         };
         /**
          * Remove the question
@@ -194,7 +199,7 @@ var stackClone;
             this.$log.info("removed num2");
         };
         // static $inject = ['$log','$meteor','$mdSidenav'];
-        QuestionService.$inject = ['$log'];
+        QuestionService.$inject = ['$log', '$meteor', '$state'];
         return QuestionService;
     })();
     stackClone.QuestionService = QuestionService;
