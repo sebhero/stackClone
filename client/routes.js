@@ -5,6 +5,21 @@
 var stackClone;
 (function (stackClone) {
     'use strict';
+    angular.module("stackClone").run(["$rootScope", "$state", '$log', function ($rootScope, $state, $log) {
+            $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+                // We can catch the error thrown when the $requireUser promise is rejected
+                // and redirect the user back to the main page
+                if (error === "AUTH_REQUIRED") {
+                    $log.info("error auth required " + error);
+                    $state.go('questions');
+                }
+                //CUSTOM ERROR CHECK to handles role based checks
+                if (error.error === "AUTH_REQUIRED" || error.error === "FORBIDDEN") {
+                    $log.info("error auth required " + error);
+                    $state.go('questions');
+                }
+            });
+        }]);
     angular.module('stackClone')
         .config(['$urlRouterProvider', '$stateProvider',
         function ($urlRouterProvider, $stateProvider) {
@@ -31,8 +46,7 @@ var stackClone;
                 templateUrl: "client/components/problems/problems.ng.html",
                 resolve: {
                     "currentUser": ["$meteor", function ($meteor) {
-                            $meteor.call('checkIfAdmin');
-                            return true;
+                            return $meteor.call('checkUserAdminAccess');
                             //return $meteor.requireUser();
                         }]
                 }
