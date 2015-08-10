@@ -11,25 +11,29 @@ namespace stackClone{
 		private questions:Array<IQuestion>;
 
 		// static $inject = ['$log','$meteor','$mdSidenav'];
-		static $inject = ['$log'];
+		static $inject = ['$log','$meteor','$state'];
 		public searchFilter:string;
 
 		// constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService){
-		constructor(public $log:ng.ILogService){
+		constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService
+			,private $state:angular.ui.IStateService){
 
 			$log.info("QuestionService LOADED");
-			// this.todos = $meteor.collection(Todos).subscribe('todos');
-			this.questions = new Array<IQuestion>();
-			this.testCreateList();
+			this.questions = $meteor.collection(Questions).subscribe('questions');
+			//For testing
+			// this.questions = new Array<IQuestion>();
+			// this.testCreateList();
 		}
 		
 		/**
 		 * add a question to the list of questions
 		 */
 		add(newQuestion:IQuestion){
+			//maybe do this on server..
+			newQuestion.author = Meteor.userId();
 			newQuestion =this.checkQ(newQuestion);
-			newQuestion.id =this.questions.push(newQuestion);
-			// newQuestion.id = this.questions.length;			
+			this.questions.push(newQuestion);
+			this.$state.go('questions');
 		}
 		
 		/**

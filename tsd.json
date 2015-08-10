@@ -16,6 +16,9 @@
     },
     "marked/marked.d.ts": {
       "commit": "287cb2e1b112bdef6de8de0dd64836583b0c49ea"
+    },
+    "meteor/meteor.d.ts": {
+      "commit": "b45569f35d5f27716d21cc2a639c7d8ccb9a0164"
     }
   }
 }
