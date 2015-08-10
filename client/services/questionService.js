@@ -4,7 +4,6 @@
 /// <reference path="../../typingsCustom/myInterfaces.d.ts" />
 var stackClone;
 (function (stackClone) {
-    // declare var Todos: Mongo.Collection<ITodo>;
     var QuestionService = (function () {
         // constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService){
         function QuestionService($log, $meteor, $state) {
@@ -22,7 +21,8 @@ var stackClone;
          */
         QuestionService.prototype.add = function (newQuestion) {
             //maybe do this on server..
-            newQuestion.author = Meteor.userId();
+            newQuestion.authorId = Meteor.userId();
+            newQuestion.author = Meteor.user().emails[0].address;
             newQuestion = this.checkQ(newQuestion);
             this.questions.push(newQuestion);
             this.$state.go('questions');
@@ -53,7 +53,8 @@ var stackClone;
          * Find the question by Id
          */
         QuestionService.prototype.findByIndex = function (indx) {
-            return this.questions[indx - 1];
+            //return this.questions[indx-1];
+            return this.$meteor.object(Questions, indx);
         };
         QuestionService.prototype.readAll = function () {
             return this.questions;
@@ -70,10 +71,9 @@ var stackClone;
                     this.$log.info("Not defined Answere");
                 if (item.author === undefined)
                     this.$log.info("Not defined Author");
-                ;
                 if (item.description === undefined)
                     this.$log.info("Not defined description");
-                if (item.id === undefined)
+                if (item._id === undefined)
                     this.$log.info("Not defined id");
                 if (item.solution === undefined)
                     this.$log.info("Not defined solution");
@@ -91,112 +91,6 @@ var stackClone;
                 }
             }
             return item;
-        };
-        QuestionService.prototype.testCreateList = function () {
-            // <IQuestion>{}
-            this.add({
-                author: "seb",
-                title: "Problems with windows",
-                description: "## test\n\ncant start windows",
-                tags: [
-                    { text: "windows" },
-                    { text: "pc" }
-                ],
-                votes: 2,
-                solved: true,
-                solution: 2,
-                answers: [
-                    {
-                        description: "restart pc",
-                        author: "seb",
-                        votes: 0,
-                        id: 1
-                    },
-                    {
-                        description: "reinstall pc",
-                        author: "seb",
-                        votes: 0,
-                        id: 2,
-                        solution: true
-                    },
-                    {
-                        description: "restart pc",
-                        author: "seb",
-                        votes: 0,
-                        id: 3
-                    }
-                ]
-            });
-            this.add({
-                author: "seb",
-                title: "Problems with vpn",
-                description: "cant start vpn service",
-                tags: [
-                    { text: "vpn" },
-                    { text: "internet" },
-                    { text: "pc" }
-                ],
-                votes: 2,
-                solved: false,
-                solution: 2,
-                answers: [
-                    {
-                        id: 1,
-                        description: "restart internet", author: "seb", votes: 0 },
-                ]
-            });
-            this.add({
-                author: "seb",
-                title: "Problems with printer",
-                description: "cant start printer",
-                tags: [
-                    { text: "printer" },
-                    { text: "xerox" }
-                ],
-                votes: 2,
-                solved: true,
-                solution: 2,
-                answers: [
-                    {
-                        id: 1,
-                        description: "restart printer", author: "seb", votes: 0
-                    },
-                    {
-                        id: 2,
-                        description: "restart printer", author: "seb", votes: 0,
-                        solution: true
-                    },
-                    {
-                        id: 3,
-                        description: "restart printer", author: "seb", votes: 0 }
-                ]
-            });
-            this.add({
-                author: "seb",
-                title: "Problems with printer",
-                description: "cant start printer",
-                tags: [
-                    { text: "printer" },
-                    { text: "xerox" }
-                ],
-                votes: 2,
-                solved: false,
-                solution: 2,
-                answers: [
-                    {
-                        id: 1,
-                        description: "restart printer", author: "seb", votes: 0 },
-                ]
-            });
-        };
-        QuestionService.prototype.testUpdateDeleteRead = function () {
-            var num2 = this.findByIndex(2);
-            this.$log.info("num2 is " + num2.title);
-            num2.title = "new title";
-            var temp2 = this.update(num2);
-            this.$log.info("return of update: " + temp2.title);
-            this.remove(num2);
-            this.$log.info("removed num2");
         };
         // static $inject = ['$log','$meteor','$mdSidenav'];
         QuestionService.$inject = ['$log', '$meteor', '$state'];

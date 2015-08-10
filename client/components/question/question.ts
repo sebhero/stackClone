@@ -31,8 +31,9 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			if($stateParams.qId != undefined){
 				//load question
 				this.theQ= questionService.findByIndex($stateParams.qId);
+
 				// this.listQ(this.theQ);
-				
+
 				if($stateParams.gotoSolve){
 					this.$log.info($stateParams.gotoSolve+ " its GOTO");
 					var newHash = 'answer_' + this.theQ.solution;
@@ -50,8 +51,9 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 		}
 		
 		listQ(q:IQuestion){
-			this.$log.info("id: "+q.id);
+			this.$log.info("id: "+q._id);
 			this.$log.info("author: "+q.author);
+			this.$log.info("authorId: "+q.authorId);
 			this.$log.info("title: "+q.title);
 			this.$log.info("description: "+q.description);
 			this.$log.info("tags: "+JSON.stringify(q.tags));
@@ -86,7 +88,7 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			this.theQ.solved = !this.theQ.solved;
 			answere.solution = !answere.solution;
 			if(this.theQ.solved){
-				this.theQ.solution =answere.id;
+				this.theQ.solution =answere._id;
 			}
 			else
 			{
@@ -102,8 +104,11 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			{
 				this.theQ.answers = [];
 			}
+
+
 			this.theQ.answers.push(<IAnswer>{
-				author:"seb",
+				authorId: Meteor.userId(),
+				author: Meteor.user().emails[0].address,
 				description:this.my_markdown,
 				votes: 0,
 				id: (this.theQ.answers.length+1)

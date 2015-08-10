@@ -32,8 +32,9 @@ var stackClone;
             }
         }
         Question.prototype.listQ = function (q) {
-            this.$log.info("id: " + q.id);
+            this.$log.info("id: " + q._id);
             this.$log.info("author: " + q.author);
+            this.$log.info("authorId: " + q.authorId);
             this.$log.info("title: " + q.title);
             this.$log.info("description: " + q.description);
             this.$log.info("tags: " + JSON.stringify(q.tags));
@@ -64,7 +65,7 @@ var stackClone;
             this.theQ.solved = !this.theQ.solved;
             answere.solution = !answere.solution;
             if (this.theQ.solved) {
-                this.theQ.solution = answere.id;
+                this.theQ.solution = answere._id;
             }
             else {
                 this.theQ.solution = undefined;
@@ -78,7 +79,8 @@ var stackClone;
                 this.theQ.answers = [];
             }
             this.theQ.answers.push({
-                author: "seb",
+                authorId: Meteor.userId(),
+                author: Meteor.user().emails[0].address,
                 description: this.my_markdown,
                 votes: 0,
                 id: (this.theQ.answers.length + 1)

@@ -1,8 +1,10 @@
 /// <reference path="myInterfaces.d.ts" />
 
+
 interface IQuestion{
-	id?:number;
+	_id?:any;
 	author:string;
+	authorId:string;
 	title:string;
 	description:string;
 	tags?:Array<ITag>;

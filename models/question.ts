@@ -9,16 +9,16 @@ namespace stackClone{
 	
 	Questions.allow({
 		insert: function (userId, question:IQuestion) {
-			return userId && question.author === userId;
+			return userId && question.authorId === userId;
 		},
 		update: function (userId, question:IQuestion, fields, modifier) {
-			if (userId !== question.author)
+			if (userId !== question.authorId)
 				return false;
 	
 			return true;
 		},
 		remove: function (userId, question:IQuestion) {
-			if (userId !== question.author)
+			if (userId !== question.authorId)
 				return false;
 	
 			return true;

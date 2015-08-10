@@ -4,15 +4,15 @@ var stackClone;
     Questions = new Mongo.Collection('questions');
     Questions.allow({
         insert: function (userId, question) {
-            return userId && question.author === userId;
+            return userId && question.authorId === userId;
         },
         update: function (userId, question, fields, modifier) {
-            if (userId !== question.author)
+            if (userId !== question.authorId)
                 return false;
             return true;
         },
         remove: function (userId, question) {
-            if (userId !== question.author)
+            if (userId !== question.authorId)
                 return false;
             return true;
         }

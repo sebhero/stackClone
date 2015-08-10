@@ -4,7 +4,7 @@
 /// <reference path="../../typingsCustom/myInterfaces.d.ts" />
 
 namespace stackClone{
-	// declare var Todos: Mongo.Collection<ITodo>;
+	 declare var Questions: Mongo.Collection<IQuestion>;
 
 	export class QuestionService{
 
@@ -30,7 +30,8 @@ namespace stackClone{
 		 */
 		add(newQuestion:IQuestion){
 			//maybe do this on server..
-			newQuestion.author = Meteor.userId();
+			newQuestion.authorId = Meteor.userId();
+			newQuestion.author = Meteor.user().emails[0].address;
 			newQuestion =this.checkQ(newQuestion);
 			this.questions.push(newQuestion);
 			this.$state.go('questions');
@@ -66,9 +67,10 @@ namespace stackClone{
 		/**
 		 * Find the question by Id
 		 */
-		findByIndex(indx:number):IQuestion
+		findByIndex(indx:number):angular.meteor.AngularMeteorObject<IQuestion>
 		{
-			return this.questions[indx-1];
+			//return this.questions[indx-1];
+			return this.$meteor.object(Questions,indx);
 		}
 		
 		readAll():Array<IQuestion>{
@@ -86,9 +88,9 @@ namespace stackClone{
 			}
 			else{
 				if(item.answers === undefined)		this.$log.info("Not defined Answere");
-				if(item.author === undefined)		this.$log.info("Not defined Author");;
+				if(item.author === undefined)		this.$log.info("Not defined Author");
 				if(item.description === undefined)	this.$log.info("Not defined description");
-				if(item.id === undefined)			this.$log.info("Not defined id");
+				if(item._id === undefined)			this.$log.info("Not defined id");
 				if(item.solution === undefined)		this.$log.info("Not defined solution");
 				if(item.solved === undefined)		{this.$log.info("Not defined solved");item.solved=false;}
 				if(item.tags === undefined)			this.$log.info("Not defined tags");
@@ -102,129 +104,122 @@ namespace stackClone{
 			return item;
 		}
 		
-		testCreateList(){
-			// <IQuestion>{}
-			this.add(
-				<IQuestion>{
-					author:"seb",
-					title:"Problems with windows",
-					description:"## test\n\ncant start windows",
-					tags:[
-						{text:"windows"},
-						{text:"pc"}
-						],
-					votes:2,
-					solved:true,
-					solution:2,
-					answers:[
-						{
-							description:"restart pc",
-							author:"seb",
-							votes:0,
-							id:1
-							},
-							
-						{
-							description:"reinstall pc",
-							author:"seb",
-							votes:0,
-							id:2,
-							solution:true
-						},
-						{
-							description:"restart pc",
-							author:"seb",
-							votes:0,
-							id:3
-						}
-						]
-
-					}
-				);
-			this.add(
-				<IQuestion>{
-					author:"seb",
-					title:"Problems with vpn",
-					description:"cant start vpn service",
-					tags:[
-						{text:"vpn"},
-						{text:"internet"},
-						{text:"pc"}
-						],
-					votes:2,
-					solved:false,
-					solution:2,
-					answers:[
-						{
-							id:1,
-							description:"restart internet",author:"seb",votes:0},
-						]
-
-					}
-				);
-			this.add(
-				<IQuestion>{
-					author:"seb",
-					title:"Problems with printer",
-					description:"cant start printer",
-					tags:[
-						{text:"printer"},
-						{text:"xerox"}
-						],
-					votes:2,
-					solved:true,
-					solution:2,
-					answers:[
-						{
-							id:1,
-							description:"restart printer",author:"seb",votes:0,
-							
-						},
-						{
-							id:2,
-							description:"restart printer",author:"seb",votes:0,
-							solution:true	
-						},
-						{
-							id:3,
-							description:"restart printer",author:"seb",votes:0}
-						]
-
-					}
-				);
-			this.add(
-				<IQuestion>{
-					author:"seb",
-					title:"Problems with printer",
-					description:"cant start printer",
-					tags:[
-						{text:"printer"},
-						{text:"xerox"}
-						],
-					votes:2,
-					solved:false,
-					solution:2,
-					answers:[
-						{
-							id:1,
-							description:"restart printer",author:"seb",votes:0},
-						]
-
-					}
-				);
-
-		}
+		//testCreateList(){
+		//	// <IQuestion>{}
+		//	this.add(
+		//		<IQuestion>{
+		//			author:"seb",
+		//			title:"Problems with windows",
+		//			description:"## test\n\ncant start windows",
+		//			tags:[
+		//				{text:"windows"},
+		//				{text:"pc"}
+		//				],
+		//			votes:2,
+		//			solved:true,
+		//			solution:2,
+		//			answers:[
+		//				{
+		//					description:"restart pc",
+		//					author:"seb",
+		//					votes:0,
+		//					},
+		//
+		//				{
+		//					description:"reinstall pc",
+		//					author:"seb",
+		//					votes:0,
+		//					solution:true
+		//				},
+		//				{
+		//					description:"restart pc",
+		//					author:"seb",
+		//					votes:0,
+		//				}
+		//				]
+		//
+		//			}
+		//		);
+		//	this.add(
+		//		<IQuestion>{
+		//			author:"seb",
+		//			title:"Problems with vpn",
+		//			description:"cant start vpn service",
+		//			tags:[
+		//				{text:"vpn"},
+		//				{text:"internet"},
+		//				{text:"pc"}
+		//				],
+		//			votes:2,
+		//			solved:false,
+		//			solution:2,
+		//			answers:[
+		//				{
+		//					id:1,
+		//					description:"restart internet",author:"seb",votes:0},
+		//				]
+		//
+		//			}
+		//		);
+		//	this.add(
+		//		<IQuestion>{
+		//			author:"seb",
+		//			title:"Problems with printer",
+		//			description:"cant start printer",
+		//			tags:[
+		//				{text:"printer"},
+		//				{text:"xerox"}
+		//				],
+		//			votes:2,
+		//			solved:true,
+		//			solution:2,
+		//			answers:[
+		//				{
+		//					description:"restart printer",author:"seb",votes:0,
+		//
+		//				},
+		//				{
+		//					description:"restart printer",author:"seb",votes:0,
+		//					solution:true
+		//				},
+		//				{
+		//					description:"restart printer",author:"seb",votes:0}
+		//				]
+		//
+		//			}
+		//		);
+		//	this.add(
+		//		<IQuestion>{
+		//			author:"seb",
+		//			title:"Problems with printer",
+		//			description:"cant start printer",
+		//			tags:[
+		//				{text:"printer"},
+		//				{text:"xerox"}
+		//				],
+		//			votes:2,
+		//			solved:false,
+		//			solution:2,
+		//			answers:[
+		//				{
+		//					description:"restart printer",author:"seb",votes:0},
+		//				]
+		//
+		//			}
+		//		);
+		//
+		//}
 		
-		testUpdateDeleteRead(){
-			var num2 = this.findByIndex(2);
-			this.$log.info("num2 is "+num2.title);
-			num2.title = "new title";
-			var temp2 = this.update(num2);
-			this.$log.info("return of update: "+temp2.title);
-			this.remove(num2);
-			this.$log.info("removed num2");
-			
-		}
+		//testUpdateDeleteRead(){
+		//	var num2 = this.findByIndex(2);
+		//	this.$log.info("num2 is "+num2.title);
+		//	num2.title = "new title";
+		//	var temp2 = this.update(num2);
+		//	this.$log.info("return of update: "+temp2.title);
+		//	this.remove(num2);
+		//	this.$log.info("removed num2");
+		//
+		//}
 		
 	}
 
