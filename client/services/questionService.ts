@@ -8,15 +8,21 @@ namespace stackClone{
 
 	export class QuestionService{
 
-		private questions:Array<IQuestion>;
+		// private questions:Array<IQuestion>;
+		private questions:angular.meteor.AngularMeteorCollection<IQuestion>;
+		// private asdf:angular.meteor.AngularMeteorCollection<IQuestion>
+		
+		// AngularMeteorCollection2
 
-		// static $inject = ['$log','$meteor','$mdSidenav'];
-		static $inject = ['$log','$meteor','$state'];
+		// static $inject = ['$log','$meteor','$state'];
+		static $inject = ['$log','$meteor'];
 		public searchFilter:string;
 
 		// constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService){
+		// constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService
+		// 	,private $state:angular.ui.IStateService){
 		constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService
-			,private $state:angular.ui.IStateService){
+			){
 
 			$log.info("QuestionService LOADED");
 			this.questions = $meteor.collection(Questions).subscribe('questions');
@@ -33,8 +39,9 @@ namespace stackClone{
 			newQuestion.authorId = Meteor.userId();
 			newQuestion.author = Meteor.user().emails[0].address;
 			newQuestion =this.checkQ(newQuestion);
+			newQuestion.answers= new Array<IAnswer>();
 			this.questions.push(newQuestion);
-			this.$state.go('questions');
+			
 		}
 		
 		/**
@@ -44,15 +51,23 @@ namespace stackClone{
 		remove(theQ:IQuestion){
 			
 			this.questions.splice(this.questions.indexOf(theQ),1);
+			// this.questions.save();
 		}
 		
 		/**
 		 * Update the question
 		 */
 		update(theQ:IQuestion){
+			
+			
 			// this.questions.indexOf
 			var indx = this.questions.indexOf(theQ,0);
-			return this.questions[indx] = theQ;
+			this.questions[indx] = theQ;
+			// this.$log.info("saved "+JSON.stringify(theQ));
+			this.$log.info("saved "+JSON.stringify(this.questions[indx]));
+			this.questions.save(theQ);
+			return this.questions[indx];
+			
 			
 		}
 		
@@ -67,10 +82,12 @@ namespace stackClone{
 		/**
 		 * Find the question by Id
 		 */
-		findByIndex(indx:number):angular.meteor.AngularMeteorObject<IQuestion>
+		findByIndex(indx:number):IQuestion
 		{
 			//return this.questions[indx-1];
-			return this.$meteor.object(Questions,indx);
+			return Questions.find(indx).fetch()[0];
+			// return null;
+			// return this.$meteor.object(Questions,indx);
 		}
 		
 		readAll():Array<IQuestion>{

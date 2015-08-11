@@ -14,6 +14,7 @@
 	"files": [
 		"C:/temp/workspace/0_clones/stackclone_met/client/routes.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/client/lib/app.ts",
+		"C:/temp/workspace/0_clones/stackclone_met/client/filters/tagFilter.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/client/components/main/main.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/client/components/ask/ask.ts",
 		"C:/temp/workspace/0_clones/stackclone_met/client/components/question/question.ts",

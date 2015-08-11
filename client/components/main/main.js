@@ -16,6 +16,10 @@ var stackClone;
             this.componentName = 'Questions as';
             $log.info("Main LOADED");
         }
+        Main.prototype.testDel = function (q) {
+            this.$log.info("calling del on " + q.title);
+            this.questionService.remove(q);
+        };
         Main.$inject = ['$log', 'QuestionService', 'SharedService'];
         return Main;
     })();

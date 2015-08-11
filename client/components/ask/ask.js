@@ -5,9 +5,10 @@ var stackClone;
      * Handles asking new questions
      */
     var Ask = (function () {
-        function Ask($log, questionService) {
+        function Ask($log, questionService, $state) {
             this.$log = $log;
             this.questionService = questionService;
+            this.$state = $state;
             this.componentName = 'sebAsk';
             $log.info("ASk loaded");
             //TODO fix the tags so it works with meteor and tsd. is missing libary in both
@@ -15,6 +16,7 @@ var stackClone;
         Ask.prototype.addQuestion = function (newQ) {
             // this.questionService.checkQ(newQ);
             this.questionService.add(newQ);
+            this.$state.go('questions');
         };
         /**
          * Resets the ask form
@@ -27,7 +29,7 @@ var stackClone;
             this.$log.info("test tag");
             this.$log.info("tags " + JSON.stringify(this.newQ.tags));
         };
-        Ask.$inject = ['$log', 'QuestionService'];
+        Ask.$inject = ['$log', 'QuestionService', '$state'];
         return Ask;
     })();
     function sebAsk() {

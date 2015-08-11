@@ -13,15 +13,19 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 
 		my_markdown:string;
 		
+		// static $inject = ['$log','QuestionService','$state'];
+		
 		static $inject = ['$log','$stateParams','$state'
-			,'QuestionService','$location', '$anchorScroll'];
+			,'$location', '$anchorScroll','QuestionService'];
+		// $state:ng.ui.IState,
 		
 			constructor(private $log:ng.ILogService, 		
 						$stateParams:IaskStateParams,
-						$state:ng.ui.IState,
-						private questionService:stackClone.QuestionService,
-						private $location, private $anchorScroll
+						private $state:angular.ui.IStateService,						
+						private $location, private $anchorScroll,						
+						private questionService:stackClone.QuestionService
 						) {
+
 			this.componentName = 'sebQuestion';
 			$log.info("State params: "+$stateParams.qId);
 			$log.info("goto params: "+$stateParams.gotoSolve);
@@ -30,9 +34,12 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			
 			if($stateParams.qId != undefined){
 				//load question
-				this.theQ= questionService.findByIndex($stateParams.qId);
+				this.theQ= this.questionService.findByIndex($stateParams.qId);
 
-				// this.listQ(this.theQ);
+				if(this.theQ != null)
+				{
+					this.listQ(this.theQ);
+				}
 
 				if($stateParams.gotoSolve){
 					this.$log.info($stateParams.gotoSolve+ " its GOTO");
@@ -46,7 +53,7 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			        // since $location.hash hasn't changed
 			        $anchorScroll();
 			      }
-			  }
+			  	}
 			}
 		}
 		
@@ -97,6 +104,8 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 			this.$log.info("idx: "+idx+" answere: "+answere.description+" idxans> "+this.theQ.answers[idx].description);  
 		}
 
+
+		//TODO is not working is not saved to db
 		addAnswer(){
 			this.my_markdown;
 			this.$log.info("adding a answer");
@@ -113,9 +122,20 @@ interface IaskStateParams extends ng.ui.IStateParamsService{
 				votes: 0,
 				id: (this.theQ.answers.length+1)
 			});
+			this.questionService.update(this.theQ);
 			//TODO this should be auto gen. from DB
-
-
+		}
+		
+		delete()
+		{
+			this.questionService.remove(this.theQ);
+			this.$state.go('questions');
+		}
+		
+		deleteAnswere(answere:IAnswer){
+			this.$log.info("delete answere> "+answere.description);
+			this.theQ.answers.splice(this.theQ.answers.indexOf(answere),1);
+			this.questionService.update(this.theQ);
 		}
 		
 		

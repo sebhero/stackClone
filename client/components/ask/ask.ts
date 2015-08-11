@@ -15,10 +15,11 @@ class Ask {
 	tags:any;
 	newQ:IQuestion;
 	
-	static $inject = ['$log','QuestionService'];
+	static $inject = ['$log','QuestionService','$state'];
 
 	constructor(private $log:ng.ILogService, 
 		private questionService:stackClone.QuestionService
+		,private $state:angular.ui.IStateService
 		) {
 			
 		this.componentName = 'sebAsk';
@@ -32,6 +33,7 @@ class Ask {
 	{
 		// this.questionService.checkQ(newQ);
 		this.questionService.add(newQ);
+		this.$state.go('questions');
 	}
 	
 	/**

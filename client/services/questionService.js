@@ -6,10 +6,11 @@ var stackClone;
 (function (stackClone) {
     var QuestionService = (function () {
         // constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService){
-        function QuestionService($log, $meteor, $state) {
+        // constructor(public $log:ng.ILogService, private $meteor:angular.meteor.IMeteorService
+        // 	,private $state:angular.ui.IStateService){
+        function QuestionService($log, $meteor) {
             this.$log = $log;
             this.$meteor = $meteor;
-            this.$state = $state;
             $log.info("QuestionService LOADED");
             this.questions = $meteor.collection(Questions).subscribe('questions');
             //For testing
@@ -24,8 +25,8 @@ var stackClone;
             newQuestion.authorId = Meteor.userId();
             newQuestion.author = Meteor.user().emails[0].address;
             newQuestion = this.checkQ(newQuestion);
+            newQuestion.answers = new Array();
             this.questions.push(newQuestion);
-            this.$state.go('questions');
         };
         /**
          * Remove the question
@@ -33,6 +34,7 @@ var stackClone;
          */
         QuestionService.prototype.remove = function (theQ) {
             this.questions.splice(this.questions.indexOf(theQ), 1);
+            // this.questions.save();
         };
         /**
          * Update the question
@@ -40,7 +42,11 @@ var stackClone;
         QuestionService.prototype.update = function (theQ) {
             // this.questions.indexOf
             var indx = this.questions.indexOf(theQ, 0);
-            return this.questions[indx] = theQ;
+            this.questions[indx] = theQ;
+            // this.$log.info("saved "+JSON.stringify(theQ));
+            this.$log.info("saved " + JSON.stringify(this.questions[indx]));
+            this.questions.save(theQ);
+            return this.questions[indx];
         };
         /**
          * return the item in the list
@@ -54,7 +60,9 @@ var stackClone;
          */
         QuestionService.prototype.findByIndex = function (indx) {
             //return this.questions[indx-1];
-            return this.$meteor.object(Questions, indx);
+            return Questions.find(indx).fetch()[0];
+            // return null;
+            // return this.$meteor.object(Questions,indx);
         };
         QuestionService.prototype.readAll = function () {
             return this.questions;
@@ -92,8 +100,10 @@ var stackClone;
             }
             return item;
         };
-        // static $inject = ['$log','$meteor','$mdSidenav'];
-        QuestionService.$inject = ['$log', '$meteor', '$state'];
+        // private asdf:angular.meteor.AngularMeteorCollection<IQuestion>
+        // AngularMeteorCollection2
+        // static $inject = ['$log','$meteor','$state'];
+        QuestionService.$inject = ['$log', '$meteor'];
         return QuestionService;
     })();
     stackClone.QuestionService = QuestionService;

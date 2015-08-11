@@ -24,6 +24,12 @@ namespace stackClone{
 			$log.info("Main LOADED");
 
 		}
+		
+		
+		testDel(q:IQuestion){
+			this.$log.info("calling del on "+q.title);
+			this.questionService.remove(q);
+		}
 
 	}
 

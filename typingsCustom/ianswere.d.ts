@@ -3,5 +3,5 @@ interface IAnswer{
 	author:string;
 	votes:number;
 	solution?:boolean;
-	_id:any;
+	_id?:any;
 }

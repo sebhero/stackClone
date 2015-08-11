@@ -2,19 +2,23 @@
 var stackClone;
 (function (stackClone) {
     var Question = (function () {
-        function Question($log, $stateParams, $state, questionService, $location, $anchorScroll) {
+        // $state:ng.ui.IState,
+        function Question($log, $stateParams, $state, $location, $anchorScroll, questionService) {
             this.$log = $log;
-            this.questionService = questionService;
+            this.$state = $state;
             this.$location = $location;
             this.$anchorScroll = $anchorScroll;
+            this.questionService = questionService;
             this.componentName = 'sebQuestion';
             $log.info("State params: " + $stateParams.qId);
             $log.info("goto params: " + $stateParams.gotoSolve);
             $log.info("params: " + JSON.stringify($state.params));
             if ($stateParams.qId != undefined) {
                 //load question
-                this.theQ = questionService.findByIndex($stateParams.qId);
-                // this.listQ(this.theQ);
+                this.theQ = this.questionService.findByIndex($stateParams.qId);
+                if (this.theQ != null) {
+                    this.listQ(this.theQ);
+                }
                 if ($stateParams.gotoSolve) {
                     this.$log.info($stateParams.gotoSolve + " its GOTO");
                     var newHash = 'answer_' + this.theQ.solution;
@@ -72,6 +76,7 @@ var stackClone;
             }
             this.$log.info("idx: " + idx + " answere: " + answere.description + " idxans> " + this.theQ.answers[idx].description);
         };
+        //TODO is not working is not saved to db
         Question.prototype.addAnswer = function () {
             this.my_markdown;
             this.$log.info("adding a answer");
@@ -85,10 +90,21 @@ var stackClone;
                 votes: 0,
                 id: (this.theQ.answers.length + 1)
             });
+            this.questionService.update(this.theQ);
             //TODO this should be auto gen. from DB
         };
+        Question.prototype.delete = function () {
+            this.questionService.remove(this.theQ);
+            this.$state.go('questions');
+        };
+        Question.prototype.deleteAnswere = function (answere) {
+            this.$log.info("delete answere> " + answere.description);
+            this.theQ.answers.splice(this.theQ.answers.indexOf(answere), 1);
+            this.questionService.update(this.theQ);
+        };
+        // static $inject = ['$log','QuestionService','$state'];
         Question.$inject = ['$log', '$stateParams', '$state',
-            'QuestionService', '$location', '$anchorScroll'];
+            '$location', '$anchorScroll', 'QuestionService'];
         return Question;
     })();
     function sebQuestion() {
